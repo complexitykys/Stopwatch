@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray">
@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Chronometer
+    <TextView
         android:id="@+id/stopwatchView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,9 +24,8 @@
         android:layout_marginBottom="@dimen/d150dp"
         android:text="@string/start_time"
         android:textColor="@color/white"
-        android:textSize="@dimen/s120sp"
+        android:textSize="@dimen/s96sp"
         android:textStyle="bold"
-        android:format="HH:MM:SS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

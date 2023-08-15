@@ -10,4 +10,5 @@
     <dimen name="d100dp">100dp</dimen>
     <dimen name="s80sp">80sp</dimen>
     <dimen name="s120sp">120sp</dimen>
+    <dimen name="_72sp">72sp</dimen>
 </resources>
