@@ -4,15 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray">
+    style="@style/BackGround">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/infoBtn"
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/changeThemeBtn"
+        style="@style/ImageButtonIco"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@null"
         android:layout_marginTop="@dimen/d10dp"
         android:layout_marginEnd="@dimen/d10dp"
-        android:src="@drawable/ic_info_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,8 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/d150dp"
+        style="@style/TextColor"
         android:text="@string/start_time"
-        android:textColor="@color/white"
         android:textSize="@dimen/s96sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

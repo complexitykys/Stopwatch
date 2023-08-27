@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 
 
 class StopwatchViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
-    private val elapsedTimeLiveData: MutableLiveData<Long> = savedStateHandle.getLiveData("elapsedTime", 0L)
+    private val elapsedTimeLiveData: MutableLiveData<Long> = savedStateHandle.getLiveData(KEY, 0L)
     val timeLiveData: LiveData<Long> = elapsedTimeLiveData
 
     private var isRunning: Boolean = false
@@ -27,7 +27,7 @@ class StopwatchViewModel(private val savedStateHandle: SavedStateHandle) : ViewM
 
     fun pauseChronometer() {
         isRunning = false
-        savedStateHandle["elapsedTime"] = elapsedTimeLiveData.value
+        savedStateHandle[KEY] = elapsedTimeLiveData.value
     }
 
     fun resetChronometer() {
@@ -44,5 +44,7 @@ class StopwatchViewModel(private val savedStateHandle: SavedStateHandle) : ViewM
             handler.postDelayed({ updateElapsedTime() }, 1000)
         }
     }
-
+    companion object {
+        const val KEY = "elapsedTime"
+    }
 }
