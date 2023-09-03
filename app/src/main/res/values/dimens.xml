@@ -11,4 +11,7 @@
     <dimen name="s80sp">80sp</dimen>
     <dimen name="s120sp">120sp</dimen>
     <dimen name="_72sp">72sp</dimen>
+    <dimen name="d15dp">15dp</dimen>
+    <dimen name="d20dp">20dp</dimen>
+    <dimen name="d30dp">30dp</dimen>
 </resources>

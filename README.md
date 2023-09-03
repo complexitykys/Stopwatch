@@ -7,3 +7,8 @@ The orientation is free: vertical, horizontal, the configuration is saved.
 There are 3 buttons: start, pause, reset. Each of them is responsible for its own functionality.
 ViewModel, LiveData, SavedStateHandle are used.
 Pleasant use
+
+     /* p.s.
+                * Of course we can make a reveal circular animation to change the theme,
+                * but is it necessary in such an application? :) 
+                * after all, 100 or more lines of code is quite a lot.. */

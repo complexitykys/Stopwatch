@@ -1,13 +1,11 @@
 package sab.todoapp.stopwatch.presentation.stopwatch
 
 import android.content.Context
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.SavedStateViewModelFactory
@@ -25,12 +23,10 @@ class FragmentStopwatch : Fragment() {
             this
         )
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentStopwatchBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -42,17 +38,18 @@ class FragmentStopwatch : Fragment() {
             binding.stopwatchView.text = formattedTime
         }
 
-        setStatusBarColor()
-
         with(binding) {
             startButton.setOnClickListener {
                 viewModel.startChronometer()
+                startButton.text = getString(R.string.start)
             }
             pauseButton.setOnClickListener {
                 viewModel.pauseChronometer()
+                startButton.text = getString(R.string.resume)
             }
             resetButton.setOnClickListener {
                 viewModel.resetChronometer()
+                startButton.text = getString(R.string.start)
             }
             changeThemeBtn.setOnClickListener {
                 toggleTheme()
@@ -73,31 +70,21 @@ class FragmentStopwatch : Fragment() {
         val sharedPreferences = activity?.getSharedPreferences(MODE, Context.MODE_PRIVATE)
         val nightMode = sharedPreferences?.getBoolean(MODE_NAME, false)
         val editor = sharedPreferences?.edit()
-        if(nightMode == true) {
+        if (nightMode == true) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             editor?.putBoolean(MODE_NAME, false)
-        }else {
+        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             editor?.putBoolean(MODE_NAME, true)
         }
         editor?.apply()
-    }
-    private fun setStatusBarColor() {
-        val nightModeFlags = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        val statusBarColor = if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
-            ContextCompat.getColor(requireContext(), R.color.gray)
-        } else {
-            ContextCompat.getColor(requireContext(), R.color.white)
-        }
-
-        activity?.window?.statusBarColor = statusBarColor
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-    
+
     companion object {
         const val FORMAT_VALUE = "%02d:%02d:%02d"
         const val MODE_NAME = "NIGHT"
