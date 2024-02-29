@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.SavedStateViewModelFactory
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import sab.todoapp.stopwatch.R
 import sab.todoapp.stopwatch.databinding.FragmentStopwatchBinding
 
@@ -23,6 +27,7 @@ class FragmentStopwatch : Fragment() {
             this
         )
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -33,9 +38,11 @@ class FragmentStopwatch : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.timeLiveData.observe(viewLifecycleOwner) {
-            val formattedTime = formatElapsedTime(it)
-            binding.stopwatchView.text = formattedTime
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.elapsedTimeFlow.collect {elapsedTime ->
+                val formattedTime = formatElapsedTime(elapsedTime)
+                binding.stopwatchView.text = formattedTime
+            }
         }
 
         with(binding) {
@@ -57,13 +64,13 @@ class FragmentStopwatch : Fragment() {
         }
     }
 
-    private fun formatElapsedTime(elapsedTime: Long): String {
+    private suspend fun formatElapsedTime(elapsedTime: Long): String = withContext(Dispatchers.IO) {
         val seconds = (elapsedTime / 1000).toInt()
         val minutes = seconds / 60
         val remainingSeconds = seconds % 60
         val hours = minutes / 60
 
-        return String.format(FORMAT_VALUE, hours, minutes, remainingSeconds)
+        return@withContext String.format(FORMAT_VALUE, hours, minutes, remainingSeconds)
     }
 
     private fun toggleTheme() {
